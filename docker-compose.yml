@@ -1,0 +1,23 @@
+version: '3.2'
+
+services:
+  homebridge:
+    hostname: homebridge
+    container_name: homebridge
+    image: oznu/homebridge:latest
+    restart: always
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - HOMEBRIDGE_CONFIG_UI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT=8581
+      - TZ=Europe/Oslo
+    volumes:
+      - ./volumes/homebridge:/homebridge
+    networks:
+      - autoNet
+
+networks:
+  autoNet:
+    external:
+      name: netmb
